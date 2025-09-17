@@ -1,0 +1,16 @@
+@{
+      ViewData["Title"] = "ConfigurarJuego";
+}
+<body>
+<h1> Seleccione la dificultad</h1>
+<form asp-action="Comenzar" asp-controller="Home">
+      <select type= "Dificultad" id="Dificultad "name="Dificultad" required>
+            <option>Facil</option>
+            <option>Normal</option>
+            <option>Dificil</option>
+      </select>
+      <p>Categoria: </p><input type="Categoria" id="Categoria" name="Categoria" required>
+      <p>Username: </p><input type="Username" id="Username" name="Username" required>
+      <button>Comenzar</button>
+</form>
+</body>

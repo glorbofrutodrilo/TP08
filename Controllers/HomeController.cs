@@ -17,4 +17,18 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult ConfigurarJuego(){
+
+        //los viewbags
+        
+        return View("ConfigurarJuego");
+    }
+    public IActionResult Comenzar(string Username, int Dificultad, int Categoria){
+        Juego.CargarPartida(Username, Dificultad, Categoria);
+        return RedirectToAction("Jugar");
+    }
+    public IActionResult Jugar(){
+        
+    }
 }
