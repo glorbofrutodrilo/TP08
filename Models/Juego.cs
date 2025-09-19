@@ -35,7 +35,7 @@ public class Juego
 
     public List<Dificultad> ObtenerDificultades()
     {
-        Lista<Dificultad> Dificultades = BD.ObtenerDificultades();
+        List<Dificultad> Dificultades = BD.ObtenerDificultades();
         return Dificultades;
     }
 
@@ -54,19 +54,39 @@ public class Juego
 
     public Preguntas ObtenerProximaPregunta()
     {
-        if (ContadorNroPreguntaActual <= ListaPreguntas.Count())
+        if (ContadorNroPreguntaActual < ListaPreguntas.Count())
         {
-            return ListaPreguntas[ContadorNroPreguntaActual];
+            PreguntaActual = ListaPreguntas[ContadorNroPreguntaActual];
             ContadorNroPreguntaActual++;
+            return PreguntaActual;
         }
         else
             return null;
     }
 
-    public List<Preguntas> ObtenerProximasRespuestas(int idPregunta)
+    public List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
-        List<Respuestas>RespuestasXIdPregunta = BD.ObtenerRespuestas(idPregunta);
+        List<Respuestas> RespuestasXIdPregunta = BD.ObtenerRespuestas(idPregunta);
         return RespuestasXIdPregunta;
+    }
+    public bool VerificarRespuesta(int idRespuesta)
+    {
+        bool correcto = false;
+
+        foreach (Respuestas r in ListaRespuestas)
+        {
+            if (r.IdRespuesta == idRespuesta && r.IdPregunta == PreguntaActual.IdPregunta)
+            {
+                if (r.Correcta)
+                {
+                    PuntajeActual += 20;
+                    CantidadPreguntasCorrectas++;
+                    correcto = true;
+                }
+            }
+        }
+
+        return correcto;
     }
 }
 
