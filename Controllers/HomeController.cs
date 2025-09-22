@@ -64,4 +64,11 @@ public class HomeController : Controller
         HttpContext.Session.Clear();
         return RedirectToAction("Index");
     }
+
+    [HttpPost] 
+    public IActionResult VerificarRespuesta(int IDPregunta, int IDRespuesta){
+        bool EsCorrecta = Juego.VerificarRespuesta(IDRespuesta);
+        ViewBag.EsCorrecta = EsCorrecta;
+        return View("Respuesta");
+    }
 }
