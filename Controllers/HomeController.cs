@@ -19,16 +19,49 @@ public class HomeController : Controller
     }
 
     public IActionResult ConfigurarJuego(){
-
-        //los viewbags
+        
+        ViewBag.Categorias = Juego.ObtenerCategorias();
+        ViewBag.Dificultades = Juego.ObtenerDificultades();
         
         return View("ConfigurarJuego");
     }
     public IActionResult Comenzar(string Username, int Dificultad, int Categoria){
         Juego.CargarPartida(Username, Dificultad, Categoria);
+        HttpContext.Session.SetString("Username", Username);
+        
         return RedirectToAction("Jugar");
     }
     public IActionResult Jugar(){
+        Preguntas pregunta = Juego.ObtenerProximaPregunta();
         
+        if (pregunta == null)
+        {
+            return RedirectToAction("Fin");
+        }
+        
+        List<Respuestas> respuestas = Juego.ObtenerProximasRespuestas(pregunta.IDPregunta);
+        Juego.ListaRespuestas = respuestas;
+        
+        ViewBag.Username = Juego.username;
+        ViewBag.PuntajeActual = Juego.PuntajeActual;
+        ViewBag.Pregunta = pregunta;
+        ViewBag.Respuestas = respuestas;
+        ViewBag.NumeroPregunta = Juego.ContadorNroPreguntaActual;
+        
+        return View("Juego");
+    }
+    
+    public IActionResult Fin()
+    {
+        ViewBag.Username = Juego.username;
+        ViewBag.PuntajeFinal = Juego.PuntajeActual;
+        
+        return View("Fin");
+    }
+    
+    public IActionResult CerrarSesion()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index");
     }
 }

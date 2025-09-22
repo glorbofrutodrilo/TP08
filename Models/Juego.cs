@@ -1,22 +1,22 @@
-public class Juego
+public static class Juego
 {
     public static string username;
 
-    public static int PuntajeActual;
+    public  static int PuntajeActual;
 
-    public static int CantidadPreguntasCorrectas;
+    public  static int CantidadPreguntasCorrectas;
 
-    public static int ContadorNroPreguntaActual;
+    public  static int ContadorNroPreguntaActual;
 
-    public static Preguntas PreguntaActual;
+    public  static Preguntas PreguntaActual;
 
-    public static List<Preguntas> ListaPreguntas;
+    public  static List<Preguntas> ListaPreguntas;
 
-    public static List<Respuestas> ListaRespuestas;
+    public  static List<Respuestas> ListaRespuestas;
 
 
 
-    public void IniciarJuego()
+    public static void IniciarJuego()
     {
         username = "";
         PuntajeActual = 0;
@@ -27,23 +27,23 @@ public class Juego
         ListaRespuestas = null;
 
     }
-    public List<Categoria> ObtenerCategorias()
+    public static List<Categoria> ObtenerCategorias()
     {
         List<Categoria> Categorias = BD.ObtenerCategorias();
         return Categorias;
     }
 
-    public List<Dificultad> ObtenerDificultades()
+    public static List<Dificultad> ObtenerDificultades()
     {
         List<Dificultad> Dificultades = BD.ObtenerDificultades();
         return Dificultades;
     }
 
-    public void CargarPartida(string username, int dificultad, int categoria)
+    public static void CargarPartida(string username, int dificultad, int categoria)
     {
         List<Preguntas> preguntas = BD.ObtenerPreguntas(dificultad, categoria);
         IniciarJuego();
-        this.username = username;
+        Juego.username = username;
         PuntajeActual = 0;
         CantidadPreguntasCorrectas = 0;
         ContadorNroPreguntaActual = 0;
@@ -52,7 +52,7 @@ public class Juego
         ListaRespuestas = null;
     }
 
-    public Preguntas ObtenerProximaPregunta()
+    public static Preguntas ObtenerProximaPregunta()
     {
         if (ContadorNroPreguntaActual < ListaPreguntas.Count())
         {
@@ -64,18 +64,18 @@ public class Juego
             return null;
     }
 
-    public List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
+    public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
         List<Respuestas> RespuestasXIdPregunta = BD.ObtenerRespuestas(idPregunta);
         return RespuestasXIdPregunta;
     }
-    public bool VerificarRespuesta(int idRespuesta)
+    public static bool VerificarRespuesta(int idRespuesta)
     {
         bool correcto = false;
 
         foreach (Respuestas r in ListaRespuestas)
         {
-            if (r.IdRespuesta == idRespuesta && r.IdPregunta == PreguntaActual.IdPregunta)
+            if (r.IDRespuesta == idRespuesta && r.IDPregunta == PreguntaActual.IDPregunta)
             {
                 if (r.Correcta)
                 {
