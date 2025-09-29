@@ -1,0 +1,28 @@
+@{
+    ViewBag.Title = "Juego";
+}
+<div class="container mt-4">
+
+    <h2>Jugador: @ViewBag.Username</h2>
+    <p><strong>Puntaje actual:</strong> @ViewBag.PuntajeActual</p>
+
+    <h4>Pregunta @ViewBag.NumeroPregunta:</h4>
+    <p>@ViewBag.Pregunta.Enunciado</p>
+
+
+    <div class="row">
+        @foreach(var resp in ViewBag.Respuestas)
+        {
+            <div class="col-md-6 mb-3">
+                <form asp-action="VerificarRespuesta" asp-controller="Juego" method="post">
+                    <input type="text" name="idPregunta" value="@ViewBag.Pregunta.IdPregunta" />
+                    <input type="text" name="idRespuesta" value="@resp.IdRespuesta" />
+
+                    <button type="submit" class="btn btn-outline-primary w-100 p-3">
+                        @resp.Contenido
+                    </button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

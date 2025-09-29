@@ -5,12 +5,20 @@
 <h1> Seleccione la dificultad</h1>
 <form asp-action="Comenzar" asp-controller="Home">
       <select type= "Dificultad" id="Dificultad "name="Dificultad" required>
-            <option>Facil</option>
-            <option>Normal</option>
-            <option>Dificil</option>
+             <option value = 1>Facil</option>
+             <option value = 2>Normal</option>
+             <option value = 3>Dificil</option>
+             <option value = -1> Todas </option>
       </select>
-      <p>Categoria: </p><input type="Categoria" id="Categoria" name="Categoria" required>
-      <p>Username: </p><input type="Username" id="Username" name="Username" required>
+      <select type="Categoria" id="Categoria" name="Categoria" required>
+             <option value = 1>Animales</option>
+             <option value = 2>Ciencias Sociales</option>
+             <option value = 3>Biologia</option>
+             <option value = 4>Matematica</option>
+             <option value = 5>Literatura</option>
+      </select>
+
+      <input type="Username" id="Username" name="Username" required>
       <button>Comenzar</button>
 </form>
 </body>
