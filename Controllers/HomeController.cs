@@ -68,7 +68,6 @@ public class HomeController : Controller
     [HttpPost] 
     public IActionResult VerificarRespuesta(int IDPregunta, int IDRespuesta){
         bool EsCorrecta = Juego.VerificarRespuesta(IDRespuesta);
-        ViewBag.EsCorrecta = EsCorrecta;
-        return View("Respuesta");
+        return  Json(new { esCorrecta = EsCorrecta });
     }
 }
