@@ -2,59 +2,62 @@
     ViewData["Title"] = "Juego";
 }
 
-<div class="juego-container">
-    <div class="juego-header">
-        <h2>@ViewBag.Username</h2>
-        <h3>Puntaje: @ViewBag.PuntajeActual</h3>
-        <h3>Pregunta @ViewBag.NumeroPregunta</h3>
+<div class="game-container">
+    <div class="player-info">
+        <div class="player-name">@ViewBag.Username</div>
+        <div class="player-score">@ViewBag.PuntajeActual Puntos</div>
+    </div>
+    <div id="countdown" class="countdown-timer">Tiempo: 60s</div>
+
+    <div class="question-container">
+        <h1 class="question-text">@ViewBag.Pregunta.Enunciado</h1>
     </div>
 
-    <div class="pregunta">
-        <h1>@ViewBag.Pregunta.Enunciado</h1>
-    </div>
-
-    <div class="respuestas-grid">
-        <form id="formRespuesta" method="post">
+    <div class="answers-container">
+        <span id="respuesta" style="display:none"></span>
+        @for (int i = 0; i < ViewBag.Respuestas.Count; i++)
+        {
+            Respuestas respuesta = ViewBag.Respuestas[i];
+            <form asp-controller="Home" asp-action="VerificarRespuesta" method="post" target="verificarFrame" style="margin:0;">
             <input type="hidden" name="IDPregunta" value="@ViewBag.Pregunta.IDPregunta" />
-
-            @for (int i = 0; i < @ViewBag.Respuestas.Count; i++)
-            {
-                Respuestas r = ViewBag.Respuestas[i];
-                string colorClase = i switch
-                {
-                    0 => "opcion rojo",
-                    1 => "opcion azul",
-                    2 => "opcion amarillo",
-                    3 => "opcion verde",
-                    _ => "opcion",
-                };
-
-                <button type="button" onclick="verificarRespuesta(@ViewBag.Pregunta.IDPregunta, @r.IDRespuesta)">
-                <span>@r.Contenido</span>
-                </button>
-            }
-        </form>
-
-        <div id="resultado"></div>
+            <input type="hidden" name="IDRespuesta" value="@respuesta.IDRespuesta" />
+            <button type="submit" class="answer-button" onclick="document.getElementById('respuesta').setAttribute('data-correcta','@respuesta.Correcta'.toLowerCase()); verificarRespuesta(@respuesta.IDRespuesta, @ViewBag.Pregunta.IDPregunta)">
+                <div class="answer-shape">
+                    @if(i==0) 
+                    { 
+                        <div class="triangle"></div> 
+                    }
+                    else if(i==1) 
+                    { 
+                        <div class="diamond"></div> 
+                    }
+                    else if(i==2) 
+                    { 
+                        <div class="circle"></div> 
+                    }
+                    else 
+                    { 
+                        <div class="square"></div> 
+                    }
+                </div>
+                <div class="answer-text">@respuesta.Contenido</div>
+            </button>
+            </form>
+        }
     </div>
 
-    <div id="resultado"></div>
+    <iframe name="verificarFrame" style="display:none"></iframe>
+
+    <div id="resultado" class="result-container" style="display: none;">
+        <div id="resultadoTexto"></div>
+        <form asp-controller="Home" asp-action="Jugar" method="get" style="margin:0;">
+            <button id="siguiente-pregunta" type="submit" class="next-button">Siguiente Pregunta</button>
+        </form>
+    </div>
+
+    <div class="progress-wrapper">
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+        <div id="progress-text" class="progress-text" data-total="@ViewBag.TotalPreguntas" data-actual="@ViewBag.NumeroPregunta"></div>
+    </div>
 </div>
 
-
-
-<script>
-    // Esto lo vas a poder extender
-    document.getElementById("formRespuestas").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        let btn = e.submitter; // El botón que se clickeó
-        let idRespuesta = btn.value;
-
-        // Simulación (ejemplo, después conectás con AJAX o SignalR si querés más fluido)
-        document.getElementById("resultado").innerHTML = 
-            "<p>Respuesta enviada: " + idRespuesta + "</p>";
-
-        // Acá podrías hacer un fetch a tu acción VerificarRespuesta y mostrar Correcto/Incorrecto
-    });
-</script>

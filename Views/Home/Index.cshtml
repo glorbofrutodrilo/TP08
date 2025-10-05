@@ -1,3 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Preguntados - Inicio";
 }
+
+<div class="home-container">
+    <div class="hero-section">
+        <div class="logo-section">
+            <img src="~/fotos/Preguntadort.png" alt="Preguntados Logo" class="game-logo">
+            <a href="/Home/ConfigurarJuego" class="play-button">
+                <span class="button-text">¡JUGAR AHORA!</span>
+                <div class="button-icon">🎮</div>
+            </a>
+        </div>
+        
+        <div class="title-section">
+            <h1 class="game-title">Preguntados</h1>
+            <p class="game-subtitle">¡Demuestra tu conocimiento!</p>
+        </div>
+
+        <div class="Integrantes">
+            <h1 class="game-title">Conoce a nuestros integrantes</h1>
+            @Url.Action("Integrantes", "Home");
+        </div>
+</div>

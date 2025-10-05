@@ -40,6 +40,7 @@ public class HomeController : Controller
         }
         
         List<Respuestas> respuestas = Juego.ObtenerProximasRespuestas(pregunta.IDPregunta);
+        respuestas = respuestas.OrderBy(_ => Random.Shared.Next()).ToList();
         Juego.ListaRespuestas = respuestas;
         
         ViewBag.Username = Juego.username;
@@ -47,6 +48,7 @@ public class HomeController : Controller
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas = respuestas;
         ViewBag.NumeroPregunta = Juego.ContadorNroPreguntaActual;
+        ViewBag.TotalPreguntas = Juego.ListaPreguntas?.Count ?? 0;
         
         return View("Juego");
     }
@@ -59,11 +61,7 @@ public class HomeController : Controller
         return View("Fin");
     }
     
-    public IActionResult CerrarSesion()
-    {
-        HttpContext.Session.Clear();
-        return RedirectToAction("Index");
-    }
+    
 
     [HttpPost] 
     public IActionResult VerificarRespuesta(int IDPregunta, int IDRespuesta){

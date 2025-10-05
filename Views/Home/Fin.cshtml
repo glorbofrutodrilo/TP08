@@ -1,8 +1,42 @@
 @{
-    ViewData["Title"] = "Fin";
+    ViewData["Title"] = "Fin del Juego";
 }
 
-<div> 
-    <h2>Jugador: @ViewBag.Username</h2>
-    <h2>Puntaje Final: @ViewBag.PuntajeFinal</h2>
+<div class="fin-container">
+    <div class="fin-header">
+        <div class="trophy-icon">🏆</div>
+        <h1 class="fin-title">¡Juego Terminado!</h1>
+    </div>
+    
+    <div class="results-section">
+        <div class="player-info-card">
+            <div class="player-avatar">👤</div>
+            <h2 class="player-name">@ViewBag.Username</h2>
+        </div>
+        
+        <div class="score-card">
+            <div class="score-label">Puntaje Final</div>
+            <div class="score-value">@ViewBag.PuntajeFinal</div>
+            <div class="score-emoji">⭐</div>
+        </div>
+    </div>
+    
+    <div class="actions-section">
+        <a href="/Home/ConfigurarJuego" class="play-again-button">
+            <span class="button-text">🔄 Jugar de Nuevo</span>
+            <div class="button-particles"></div>
+        </a>
+        
+        <a href="/Home/Index" class="home-button">
+            <span class="button-text">🏠 Ir al Inicio</span>
+        </a>
+    </div>
+    
+    <div class="celebration">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
 </div>

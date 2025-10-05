@@ -47,9 +47,9 @@ public static class Juego
         PuntajeActual = 0;
         CantidadPreguntasCorrectas = 0;
         ContadorNroPreguntaActual = 0;
-        PreguntaActual = null;
+        PreguntaActual = preguntas[0];
         ListaPreguntas = preguntas;
-        ListaRespuestas = null;
+        ListaRespuestas = BD.ObtenerRespuestas(PreguntaActual.IDPregunta);
     }
 
     public static Preguntas ObtenerProximaPregunta()

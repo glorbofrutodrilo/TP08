@@ -1,24 +1,45 @@
 @{
-      ViewData["Title"] = "ConfigurarJuego";
+    ViewData["Title"] = "Configurar Juego";
 }
-<body>
-<h1> Seleccione la dificultad</h1>
-<form asp-action="Comenzar" asp-controller="Home">
-      <select type= "Dificultad" id="Dificultad "name="Dificultad" required>
-             <option value = 1>Facil</option>
-             <option value = 2>Normal</option>
-             <option value = 3>Dificil</option>
-             <option value = -1> Todas </option>
-      </select>
-      <select type="Categoria" id="Categoria" name="Categoria" required>
-             <option value = 1>Historia</option>
-             <option value = 2>Geografia</option>
-             <option value = 3>Ciencia</option>
-             <option value = 4>Deportes</option>
-             <option value = 5>Arte</option>
-      </select>
 
-      <input type="Username" id="Username" name="Username" placeholder= "Username"required>
-      <button>Comenzar</button>
-</form>
-</body>
+<div class="config-container">
+    <div class="config-header">
+        <h1 class="config-title">⚙️ Configurar Juego</h1>
+        <p class="config-subtitle">Personaliza tu experiencia de juego</p>
+    </div>
+    
+    <div class="config-form-container">
+        <form asp-action="Comenzar" asp-controller="Home" class="config-form">
+            <div class="form-group">
+                <p class="form-p">Nombre de Usuario</p>
+                <input type="text" id="Username" name="Username" class="form-input" placeholder="Ingresa tu nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <p class="form-p"> Dificultad</p>
+                <select id="Dificultad" name="Dificultad" class="form-select" required>
+                    <option>Selecciona una dificultad</option>
+                    @foreach (Dificultad dificultad in ViewBag.Dificultades)
+                    {
+                        <option value="@dificultad.IDDificultad">@dificultad.Nombre</option>
+                    }
+                    <option value="-1"> Todas las dificultades</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <p class="form-p"> Categoría</p>
+                <select id="Categoria" name="Categoria" class="form-select" required>
+                    <option>Selecciona una categoría</option>
+                    @foreach (Categoria categoria in ViewBag.Categorias)
+                    {
+                        <option value="@categoria.IDCategoria">@categoria.Nombre</option>
+                    }
+                    <option value="-1">Todas las categorías</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="start-button"> ¡COMENZAR JUEGO!<div class="button-glow"></div></button>
+        </form>
+    </div>
+</div>
