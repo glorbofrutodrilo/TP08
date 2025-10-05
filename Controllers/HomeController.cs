@@ -61,6 +61,11 @@ public class HomeController : Controller
         return View("Fin");
     }
     
+    public IActionResult Integrantes()
+    {
+        return View("Integrantes");
+    }
+    
     
 
     [HttpPost] 

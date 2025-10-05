@@ -13,18 +13,24 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
 }
 
 /* ===== ESTILOS PARA HEADER ===== */
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 24px;
+  background: linear-gradient(90deg, rgba(102,126,234,0.35), rgba(118,75,162,0.35));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
 header img {
@@ -41,24 +47,36 @@ header div {
 header a {
   color: white;
   text-decoration: none;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 20px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 24px;
   background: linear-gradient(45deg, #667eea, #764ba2);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
 }
 
 header a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 10px 26px rgba(102, 126, 234, 0.55);
 }
 
 footer {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #e9ecef;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, rgba(102,126,234,0.25), rgba(118,75,162,0.25));
+  border-top: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* ===== ESTILOS DEL JUEGO PREGUNTADOS ===== */
@@ -427,6 +445,60 @@ footer {
 }
 
 /* ===== ESTILOS PARA INDEX ===== */
+/* ===== ESTILOS PARA INTEGRANTES ===== */
+.integrantes-list {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.integrante-card {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.integrante-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 42px rgba(0,0,0,0.28);
+}
+
+.integrante-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    margin-bottom: 14px;
+}
+
+.integrante-name {
+    font-size: 1.25rem;
+    margin: 8px 0 4px 0;
+}
+
+.integrante-role {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .integrantes-list {
+        grid-template-columns: 1fr;
+        padding: 40px 16px;
+    }
+}
 
 .home-container {
     min-height: 100vh;
@@ -493,6 +565,29 @@ footer {
     color: rgba(255, 255, 255, 0.9);
     margin: 0;
     font-weight: 300;
+}
+
+.integrantes-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 28px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.35);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.integrantes-link:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
 }
 
 .action-section {
