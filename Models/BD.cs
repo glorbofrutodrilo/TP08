@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 
 public class BD{
-    private static string _connectionString = @"Server=MSI\SQLEXPRESS03;Database=TP08;Integrated Security=True;TrustServerCertificate=True;";
+    private static string _connectionString = @"Server=LocalHost;Database=TP08;Integrated Security=True;TrustServerCertificate=True;";
 
     public static List<Categoria> ObtenerCategorias()
 {
